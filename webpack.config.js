@@ -25,7 +25,13 @@ module.exports = {
       Main: 'app/components/Main.jsx',
       applicationStyles: 'app/styles/app.scss',
       Navigation: 'app/components/Navigation.jsx',
-      Footer: 'app/components/Footer.jsx'
+      Footer: 'app/components/Footer.jsx',
+      News: 'app/components/News.jsx',
+      About: 'app/components/About.jsx',
+      Login: 'app/components/Login.jsx',
+      ForgotPassword: 'app/components/ForgotPassword.jsx',
+      RegisterUser: 'app/components/RegisterUser.jsx',
+
     },
     extensions: ['', '.js', '.jsx']
   },

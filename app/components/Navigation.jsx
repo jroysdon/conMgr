@@ -1,5 +1,7 @@
 var React = require('react');
 var {Link, IndexLink} = require('react-router');
+var About = require('About');
+var News = require('News');
 
 var Navigation = () => {
   return (
