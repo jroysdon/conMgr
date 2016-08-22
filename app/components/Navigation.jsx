@@ -1,7 +1,5 @@
 var React = require('react');
 var {Link, IndexLink} = require('react-router');
-var About = require('About');
-var News = require('News');
 
 var Navigation = () => {
   return (
@@ -9,13 +7,13 @@ var Navigation = () => {
       <div className="top-bar-left">
         <ul className="menu">
           <li className="menu-text">
-            Convention Manager
+            <IndexLink to="/" activeClassName="active-link">Convention Manager</IndexLink>
           </li>
           <li>
-            <IndexLink to="/" activeClassName="active-link">News</IndexLink>
+            <IndexLink to="/News" activeClassName="active-link">News</IndexLink>
           </li>
           <li>
-            <Link to="/" activeClassName="active-link">About</Link>
+            <Link to="/About" activeClassName="active-link">About</Link>
           </li>
         </ul>
       </div>
