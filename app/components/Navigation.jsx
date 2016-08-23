@@ -1,5 +1,30 @@
 var React = require('react');
+var Parse = require('Parse');
 var {Link, IndexLink} = require('react-router');
+
+// Parse.initialize("ddddddd","hhhhh");
+// var currentUser = Parse.User.current();
+ var welcomePrompt = "";
+//
+// if (currentUser) {
+//     var welcomePrompt = () => {
+//       return (
+//         <div>
+//           <Link to="/Login" activeClassName="active-link">Login</Link>
+//         </div>
+//       )
+//     }
+// } else {
+//     // show the signup or login page
+//     var welcomePrompt = () => {
+//       return (
+//         <div>
+//           <Link to="/Login" activeClassName="active-link">Login</Link>
+//         </div>
+//       )
+//
+//     }
+// };
 
 var Navigation = () => {
   return (
@@ -21,6 +46,7 @@ var Navigation = () => {
         <ul className="menu">
           <li>
             <Link to="/Login" activeClassName="active-link">Login</Link>
+            {welcomePrompt}
           </li>
           <li className="menu-text">
             Created by <a href="http://www.consept.com" target="_blank">Jim Roysdon</a>
