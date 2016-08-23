@@ -20,7 +20,7 @@ var Navigation = () => {
       <div className="top-bar-right">
         <ul className="menu">
           <li>
-            <Link to="/" activeClassName="active-link">Login</Link>
+            <Link to="/Login" activeClassName="active-link">Login</Link>
           </li>
           <li className="menu-text">
             Created by <a href="http://www.consept.com" target="_blank">Jim Roysdon</a>
