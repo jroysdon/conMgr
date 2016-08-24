@@ -28,7 +28,7 @@ module.exports = {
       Footer: 'app/components/Footer.jsx',
       News: 'app/components/News.jsx',
       About: 'app/components/About.jsx',
-      Login: 'app/components/Login.jsx',
+      LoginForm: 'app/components/LoginForm.jsx',
       ForgotPassword: 'app/components/ForgotPassword.jsx',
       RegisterUser: 'app/components/RegisterUser.jsx'
 

@@ -45,7 +45,7 @@ var Navigation = () => {
       <div className="top-bar-right">
         <ul className="menu">
           <li>
-            <Link to="/Login" activeClassName="active-link">Login</Link>
+            <Link to="/LoginForm" activeClassName="active-link">Login</Link>
             {welcomePrompt}
           </li>
           <li className="menu-text">

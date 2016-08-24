@@ -5,7 +5,7 @@ var Main = require('Main');
 var Footer = require('Footer');
 var About = require('About');
 var News = require('News');
-var Login = require('Login');
+var LoginForm = require('LoginForm');
 var ForgotPassword = require('ForgotPassword');
 var RegisterUser = require('RegisterUser');
 
@@ -23,7 +23,7 @@ ReactDOM.render(
     <Route path="/" component={Main}>
       <Route path = "About" component={About}/>
       <Route path = "News" component={News}/>
-      <Route path = "Login" component={Login}/>
+      <Route path = "LoginForm" component={LoginForm}/>
       <Route path = "ForgotPassword" component={ForgotPassword}/>
       <Route path = "RegisterUser" component={RegisterUser}/>
     </Route>
