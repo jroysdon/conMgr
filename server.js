@@ -1,16 +1,27 @@
 var express = require('express');
-
-var ParseServer = require('parse-server').ParseServer;
+var Parse = require('parse/node');
 var path = require('path');
 
-var databaseUri = 'mongodb://conAdmin:FtF-XFy-HJ8-Mu3@ds011399.mlab.com:11399/heroku_lk237rt0';
+Parse.initialize("cmparseserver");
+Parse.serverURL = 'http://cmparseserver.herokuapp.com/parse'
 
-var api = new ParseServer({
-  serverURL: "https://your-app-name.herokuapp.com/parse",
-  databaseURI: databaseUri || 'mongodb://localhost:27017/dev',
-  cloud: process.env.CLOUD_CODE_MAIN || __dirname + '/cloud/main.js',
-  appId: process.env.APP_ID || 'conMgr',
-  masterKey: process.env.MASTER_KEY || 'gigglemonkeytinklepants' //Add your master key here. Keep it secret!
+var GameScore = Parse.Object.extend("GameScore");
+var gameScore = new GameScore();
+
+gameScore.set("score", 1337);
+gameScore.set("playerName", "Sean Plott");
+gameScore.set("cheatMode", false);
+
+gameScore.save(null, {
+  success: function(gameScore) {
+    // Execute any logic that should take place after the object is saved.
+    alert('New object created with objectId: ' + gameScore.id);
+  },
+  error: function(gameScore, error) {
+    // Execute any logic that should take place if the save fails.
+    // error is a Parse.Error with an error code and message.
+    alert('Failed to create new object, with error code: ' + error.message);
+  }
 });
 
 // Create our app

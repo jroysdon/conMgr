@@ -31,8 +31,8 @@ var RegisterUser = React.createClass({
 
     }
 
-Parse.initialize("conMgr","giggle");
-Parse.serverURL = 'http://localhost:1337/parse';
+//Parse.initialize("conMgr","giggle");
+//Parse.serverURL = 'http://localhost:1337/parse';
 var user = new Parse.User();
 user.set("username", username);
 user.set("password", password);

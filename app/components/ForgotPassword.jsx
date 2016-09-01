@@ -7,20 +7,6 @@ var ForgotPassword = React.createClass({
 
   onSubmit: function(e){
     e.preventDefault();
-    Parse.initialize("conMgr","giggle");
-    Parse.serverURL = 'http://localhost:1337/parse';
-    var email = this.refs.email.value;
-    Parse.User.requestPasswordReset(email, {
-      success: function() {
-      // Password reset request was sent successfully
-      alert("Success");
-      },
-      error: function(error) {
-        // Show the error message somewhere
-        alert("Error: " + error.code + " " + error.message);
-      }
-    });
-
   },
   render: function(){
     return (
