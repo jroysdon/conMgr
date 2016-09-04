@@ -2,7 +2,9 @@ var React = require('react');
 var Parse = require('Parse');
 var {Link, IndexLink} = require('react-router');
 
-// Parse.initialize("ddddddd","hhhhh");
+Parse.initialize("cmparseserver");
+Parse.serverURL = "https://cmparseserver.herokuapp.com/parse";
+
 // var currentUser = Parse.User.current();
  var welcomePrompt = "";
 //

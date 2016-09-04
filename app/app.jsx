@@ -9,7 +9,6 @@ var LoginForm = require('LoginForm');
 var ForgotPassword = require('ForgotPassword');
 var RegisterUser = require('RegisterUser');
 
-require('./redux-example.jsx');
 
 // Load foundation
 require('style!css!foundation-sites/dist/foundation.min.css')
