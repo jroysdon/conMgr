@@ -5,8 +5,8 @@ var {Link, IndexLink} = require('react-router');
 Parse.initialize("cmparseserver");
 Parse.serverURL = "https://cmparseserver.herokuapp.com/parse";
 
-// var currentUser = Parse.User.current();
- var welcomePrompt = "";
+ var currentUser = Parse.User.current();
+ var welcomePrompt = currentUser;
 //
 // if (currentUser) {
 //     var welcomePrompt = () => {
