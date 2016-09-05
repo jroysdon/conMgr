@@ -30,7 +30,8 @@ module.exports = {
       About: 'app/components/About.jsx',
       LoginForm: 'app/components/LoginForm.jsx',
       ForgotPassword: 'app/components/ForgotPassword.jsx',
-      RegisterUser: 'app/components/RegisterUser.jsx'
+      RegisterUser: 'app/components/RegisterUser.jsx',
+      WelcomePrompt: 'app/components/WelcomePrompt.jsx'
 
     },
     extensions: ['', '.js', '.jsx']

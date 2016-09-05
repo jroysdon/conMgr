@@ -2,31 +2,8 @@ var React = require('react');
 var Parse = require('Parse');
 var {Link, IndexLink} = require('react-router');
 
-Parse.initialize("cmparseserver");
-Parse.serverURL = "https://cmparseserver.herokuapp.com/parse";
+var WelcomePrompt = require('WelcomePrompt');
 
- var currentUser = Parse.User.current();
- var welcomePrompt = currentUser;
-//
-// if (currentUser) {
-//     var welcomePrompt = () => {
-//       return (
-//         <div>
-//           <Link to="/Login" activeClassName="active-link">Login</Link>
-//         </div>
-//       )
-//     }
-// } else {
-//     // show the signup or login page
-//     var welcomePrompt = () => {
-//       return (
-//         <div>
-//           <Link to="/Login" activeClassName="active-link">Login</Link>
-//         </div>
-//       )
-//
-//     }
-// };
 
 var Navigation = () => {
   return (
@@ -47,8 +24,7 @@ var Navigation = () => {
       <div className="top-bar-right">
         <ul className="menu">
           <li>
-            <Link to="/LoginForm" activeClassName="active-link">Login</Link>
-            {welcomePrompt}
+              <WelcomePrompt></WelcomePrompt>
           </li>
           <li className="menu-text">
             Created by <a href="http://www.consept.com" target="_blank">Jim Roysdon</a>

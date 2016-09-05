@@ -8,6 +8,7 @@ var News = require('News');
 var LoginForm = require('LoginForm');
 var ForgotPassword = require('ForgotPassword');
 var RegisterUser = require('RegisterUser');
+var WelcomePrompt = require('WelcomePrompt');
 
 
 // Load foundation
