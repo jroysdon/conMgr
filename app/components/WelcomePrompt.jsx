@@ -16,9 +16,11 @@ Parse.serverURL = "https://cmparseserver.herokuapp.com/parse";
 // );
 var currentUser = Parse.User.current();
 var loginMenu = "";
-debugger;
+var nameFirst = "";
+//debugger;
 if (currentUser) {
-    loginMenu = "Welcome " + currentUser.get("nameFirst");
+  nameFirst = currentUser.get("nameFirst");
+    loginMenu = "Welcome " + nameFirst;
   } else {
     loginMenu = '<Link to=\"/Login\" activeClassName=\"active-link\">Login</Link>'
   };
@@ -44,7 +46,7 @@ var WelcomePrompt = React.createClass( {
    var loginMenu = this.state.loginMenu;
     return (
       <div ref="loginMenu" >
-        {loginMenu}{currentUser.get("nameFirst")}
+        {loginMenu}{nameFirst}
       </div>
     )}
 });

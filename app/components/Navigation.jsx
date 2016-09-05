@@ -24,7 +24,7 @@ var Navigation = () => {
       <div className="top-bar-right">
         <ul className="menu">
           <li>
-              <WelcomePrompt></WelcomePrompt>
+              <WelcomePrompt className="top-bar-right"></WelcomePrompt>
           </li>
           <li className="menu-text">
             Created by <a href="http://www.consept.com" target="_blank">Jim Roysdon</a>
