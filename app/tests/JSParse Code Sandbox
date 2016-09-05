@@ -1,0 +1,40 @@
+// user.set("username", "jroysdon@gmail.com");
+// user.set("password","12345678");
+// user.set("email","jroysdon@gmail.com");
+// user.signUp().then (function success (user) {
+//   console.log("Signed up");
+// }, function error(err) {
+//   console.error(err);
+//
+// });
+
+// var welcomePrompt = "";
+//
+// Parse.User.logIn("jroysdon@gmail.com" , "12345678").then (function (user){
+//   welcomePrompt = Parse.User.current();
+//   }, function error (err){
+//       console.error(err.message);
+//   }
+// );
+
+
+
+// if (currentUser) {
+//     var welcomePrompt = () => {
+//       return (
+//         <div>
+//           <Link to="/Login" activeClassName="active-link">Login</Link>
+//         </div>
+//       )
+//     }
+// } else {
+//     // show the signup or login page
+//     var welcomePrompt = () => {
+//       return (
+//         <div>
+//           <Link to="/Login" activeClassName="active-link">Login</Link>
+//         </div>
+//       )
+//
+//     }
+// };
