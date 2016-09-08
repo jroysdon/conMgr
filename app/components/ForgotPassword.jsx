@@ -1,7 +1,7 @@
-var React = require('react');
-var Parse = require('Parse');
+import React from 'react';
+import Parse from 'Parse';
 
-var {Link, IndexLink} = require('react-router');
+import {Link, IndexLink} from 'react-router';
 
 var ForgotPassword = React.createClass({
 

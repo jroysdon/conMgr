@@ -1,7 +1,8 @@
-var React = require('react');
-var {Link, IndexLink} = require('react-router');
+import React from 'react';
 
-var Parse = require('Parse');
+import {Link, IndexLink} from 'react-router';
+
+import Parse from 'Parse';
 Parse.initialize("cmparseserver");
 Parse.serverURL = "https://cmparseserver.herokuapp.com/parse";
 

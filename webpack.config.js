@@ -31,8 +31,8 @@ module.exports = {
       LoginForm: 'app/components/LoginForm.jsx',
       ForgotPassword: 'app/components/ForgotPassword.jsx',
       RegisterUser: 'app/components/RegisterUser.jsx',
-      WelcomePrompt: 'app/components/WelcomePrompt.jsx'
-
+      WelcomePrompt: 'app/components/WelcomePrompt.jsx',
+      configureStore: 'app/store/configureStore.js'
     },
     extensions: ['', '.js', '.jsx']
   },

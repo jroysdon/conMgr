@@ -1,7 +1,8 @@
-var React = require('react');
-var ReactDOM = require('react-dom')
-var Parse = require('Parse');
-var {Link, IndexLink} = require('react-router');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Parse from 'Parse';
+import {Link, IndexLink} from 'react-router';
+
 
 var RegisterUser = React.createClass({
   onSubmit: function(e){
