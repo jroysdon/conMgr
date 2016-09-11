@@ -1,57 +1,45 @@
+
+
 import React from 'react';
-import Parse from 'Parse';
-import {Link, IndexLink} from 'react-router';
+import { reduxForm } from 'redux-form';
 
-var LoginForm = React.createClass({
+class LoginForm extends React.Component {
+  // handleFormSubmit = (values) => {
+  //   console.log(values);
+  // };
 
-  onSubmit: function (e){
-     e.preventDefault();
-    var currentUser = Parse.User.current();
-    if (!currentUser){
-      var username = this.refs.username.value;
-      var password = this.refs.password.value;
-      Parse.User.logIn(username, password, {
-        success: function(user) {
-          // Do stuff after successful login.
-          debugger;
-          console.log("Signed in");
-        },
-        error: function(username, error) {
-          // The login failed. Check error to see why.
-          debugger;
-          this.refs.errMsg.innerHTML = error.message;
-        }
-      });
-    } else {
-      console.log(currentUser.get("nameFirst"));
-    };
-  },
+  handleFormSubmit: function (values) {
+    console.log(values);
+      this.props.signInUser(values);
+  
+  };
 
-  render: function (){
+
+  render() {
+    const { handleSubmit, fields: { username, password }} = this.props;
     return(
       <div>
-        <div id = "login" >
           <h3>Login:</h3>
-        <form onSubmit={this.onSubmit} ref="form">
-          <p>
+          <form onSubmit={handleSubmit(this.handleFormSubmit)} ref="LoginForm">
+            <fieldset className="form-group">
             <label>Username:</label>
-            <input type="text" name="username" ref="username" placeholder="Username" defaultValue = "jroysdon"></input>
-            <br/>
+            <input {...username} type="text" name="username" ref="username" placeholder="Username" defaultValue = "jroysdon"></input>
+            </fieldset>
+
+             <fieldset className="form-group">
             <label>Password:</label>
-            <input type="password" name="password" ref="password" placeholder="Password" defaultValue = "123"></input>
-            <br/>
+            <input {...password} type="password" name="password" ref="password" placeholder="Password" defaultValue = "123"></input>
+            </fieldset>
             <button className="button expanded">Submit</button>
             <br/>
-            <Link to="/ForgotPassword" activeClassName="active-link">Reset Password</Link> / <Link to="/RegisterUser" activeClassName="active-link">Register</Link>
-          </p>
           <div id="errMsg"></div>
-
         </form>
-        </div>
       </div>
   );
 }
-});
+};
 
-
-module.exports = LoginForm;
+export default reduxForm({
+  form: 'LoginForm',
+  fields: ['username', 'password']
+})(LoginForm);

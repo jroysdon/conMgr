@@ -11,13 +11,19 @@
   "license": "MIT",
   "dependencies": {
     "axios": "^0.9.1",
+    "bootstrap": "^3.3.7",
     "express": "^4.13.4",
     "parse": "^1.9.1",
-    "react": "^0.14.7",
-    "react-day-picker": "^2.4.1",
+    "react": "^0.14.8",
     "react-dom": "^0.14.7",
+    "react-modal": "^1.4.0",
     "react-router": "^2.0.0",
-    "redux": "^3.3.1"
+    "redux": "^3.5.0",
+    "redux-form": "^5.2.3",
+    "redux-promise": "^0.5.3",
+    "redux-thunk": "^2.1.0",
+    "sass": "^0.5.0",
+    "superagent": "^2.2.0"
   },
   "devDependencies": {
     "babel-core": "^6.5.1",
@@ -36,12 +42,12 @@
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^1.7.0",
     "mocha": "^2.4.5",
-    "node-sass": "^3.4.2",
+    "node-sass": "^3.9.3",
     "parse": "^1.9.1",
     "react-redux": "^4.4.5",
-    "sass-loader": "^3.1.2",
+    "sass-loader": "^3.2.3",
     "script-loader": "^0.6.1",
     "style-loader": "^0.13.0",
-    "webpack": "^1.12.13"
+    "webpack": "^1.13.2"
   }
 }

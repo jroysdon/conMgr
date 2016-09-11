@@ -1,9 +1,12 @@
 import { combineReducers } from 'redux';
-import venuesReducer from '../store/venues';
+import GifsReducer from './gifs';
+import ModalReducer from './modal';
+import { reducer as FormReducer } from 'redux-form';
 
 const rootReducer = combineReducers({
-  venues: venuesReducer
-
+  form: FormReducer,
+  gifs: GifsReducer,
+  modal: ModalReducer
 });
 
 export default rootReducer;

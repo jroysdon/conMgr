@@ -1,6 +1,7 @@
 import React from 'react';
-import Parse from 'Parse';
-import {Link, IndexLink} from 'react-router';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as Actions from '../actions';
 
 var Navigation = React.createClass({
 
@@ -37,4 +38,8 @@ var Navigation = React.createClass({
   }
 });
 
-module.exports = Navigation;
+function mapStateToProps(state) {
+  return {}
+}
+
+export default connect(mapStateToProps)(Navigator);
