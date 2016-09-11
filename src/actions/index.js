@@ -30,7 +30,7 @@ export function requestGifs(term = null) {
 
 export function favoriteGif({selectedGif}) {
   console.log('selectedGif' + selectedGif);
-  const userRef = Parse.currentUser();
+  const userRef = Parse.User.current();
  console.log('userRef' + userRef);
   const gifId = selectedGif.id;
   return dispatch => userRef.update({
@@ -41,7 +41,7 @@ export function favoriteGif({selectedGif}) {
 }
 
 export function unfavoriteGif({selectedGif}) {
-  const userRef = Parse.currentUser();
+  const userRef = Parse.User.current();
   const gifId = selectedGif.id;
   return dispatch => userRef.child(gifId).remove();
   return selectedGif;
@@ -50,7 +50,7 @@ export function unfavoriteGif({selectedGif}) {
 
 export function fetchFavoritedGifs() {
   return function(dispatch) {
-    const userRef = Parse.currentUser();
+    const userRef = Parse.User.current();
     userRef.on('value', snapshot => {
       dispatch({
         type: FETCH_FAVORITED_GIFS,

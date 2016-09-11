@@ -50,14 +50,21 @@ class Signup extends React.Component {
           { this.renderAuthenticationError() }
 
           <form onSubmit={handleSubmit(this.handleFormSubmit)}>
+            <fieldset className={`form-group ${email.touched && email.invalid ? 'has-error' : ''}`}>
               <label className="control-label">Email</label>
-              <input ref = 'email' name = 'email' {...email} type="text" placeholder="Email" className="form-control" />
-
+              <input {...email} type="text" placeholder="Email" className="form-control" />
+              {email.touched ? <div className="help-block">{email.error}</div> : ''}
+            </fieldset>
+            <fieldset className={`form-group ${password.touched && password.invalid ? 'has-error' : ''}`}>
               <label className="control-label">Password</label>
-              <input ref = 'password' name = 'password' {...password} type="password" placeholder="Password" className="form-control" />
+              <input {...password} type="password" placeholder="Password" className="form-control" />
+              {password.touched ? <div className="help-block">{password.error}</div> : ''}
+            </fieldset>
+            <fieldset className={`form-group ${passwordConfirmation.touched && passwordConfirmation.invalid ? 'has-error' : ''}`}>
               <label className="control-label">Password Confirmation</label>
-              <input ref = 'passwordConfirmation' name = 'passwordConfirmation' {...passwordConfirmation} type="password" placeholder="Password" className="form-control" />
-              
+              <input {...passwordConfirmation} type="password" placeholder="Password" className="form-control" />
+              {passwordConfirmation.touched ? <div className="help-block">{passwordConfirmation.error}</div> : ''}
+            </fieldset>
             <button action="submit" className="btn btn-primary">Sign up</button>
           </form>
         </div>
