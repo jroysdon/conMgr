@@ -77,9 +77,20 @@ export function closeModal() {
 export function signUpUser(credentials) {
   return function(dispatch) {
     var user = new Parse.User();
-    user.set("username", credentials.email);
+    user.set("username", credentials.username);
     user.set("password", credentials.password);
     user.set("email", credentials.email);
+//    other fields can be set just like with Parse.Object
+    user.set("nameFirst", credentials.nameFirst);
+    user.set("nameLast", credentials.nameLast);
+    user.set("address", credentials.address);
+    user.set("city", credentials.city);
+    user.set("state", credentials.state);
+    user.set("zipcode", credentials.zip);
+    user.set("phoneNumber", credentials.tel);
+    user.set("tNc", credentials.tNc);
+    user.set("emailverified",false)
+
     user.signUp(null, {
       success: function(user) {
         // Hooray! Let them use the app now.
@@ -105,7 +116,9 @@ export function signInUser(credentials) {
               });
 
               // console.log(authData);
-              browserHistory.push('/favorites');
+              // browserHistory.push('/favorites');
+              browserHistory.push('/');
+
            },
            error: function(username, error) {
             // The login failed. Check error to see why.
