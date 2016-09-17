@@ -22,17 +22,17 @@ module.exports = {
   resolve: {
     root: __dirname,
     alias: {
-      Main: 'app/components/Main.jsx',
-      applicationStyles: 'app/styles/app.scss',
-      Navigation: 'app/components/Navigation.jsx',
-      Footer: 'app/components/Footer.jsx',
-      News: 'app/components/News.jsx',
-      About: 'app/components/About.jsx',
-      LoginForm: 'app/components/LoginForm.jsx',
-      ForgotPassword: 'app/components/ForgotPassword.jsx',
-      RegisterUser: 'app/components/RegisterUser.jsx',
-      WelcomePrompt: 'app/components/WelcomePrompt.jsx',
-      configureStore: 'app/store/configureStore.js'
+      // Main: 'app/components/Main.jsx',
+      // applicationStyles: 'app/styles/app.scss',
+      // Navigation: 'app/components/Navigation.jsx',
+      // Footer: 'app/components/Footer.jsx',
+      // News: 'app/components/News.jsx',
+      // About: 'app/components/About.jsx',
+      // LoginForm: 'app/components/LoginForm.jsx',
+      // ForgotPassword: 'app/components/ForgotPassword.jsx',
+      // RegisterUser: 'app/components/RegisterUser.jsx',
+      // WelcomePrompt: 'app/components/WelcomePrompt.jsx',
+      // configureStore: 'app/store/configureStore.js'
     },
     extensions: ['', '.js', '.jsx']
   },

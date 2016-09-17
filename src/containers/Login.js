@@ -1,4 +1,5 @@
 import React from 'react';
+import { browserHistory } from 'react-router';
 import { reduxForm } from 'redux-form';
 import * as Actions from '../actions';
 
@@ -31,7 +32,7 @@ class Login extends React.Component {
   }
 
   render() {
-    const { handleSubmit, fields: { email, password }} = this.props;
+    const { handleSubmit, fields: { email, password },submitting} = this.props;
 
     return(
       <div className="container">
@@ -51,7 +52,33 @@ class Login extends React.Component {
               <input {...password} type="password" placeholder="Password" className="form-control" />
               {password.touched ? <div className="help-block">{password.error}</div> : ''}
             </fieldset>
-            <button action="submit" className="btn btn-primary">Sign In</button>
+
+
+            <div className="btn-group btn-group-justified" role="group" aria-label="...">
+              <div className="btn-group " role="group">
+                <button type="submit" className="btn btn-primary" disabled={submitting}>
+                  {submitting ? <i/> : <i/>}Log in
+                </button>
+              </div>
+              <div className="btn-group" role="group">
+                <button type="button" className="btn btn-default"
+                  onClick={() => {
+                      browserHistory.push('/ResetPassword');
+                  }}>
+                  Forgot Password
+                </button>
+              </div>
+              <div className="btn-group" role="group">
+                <button type="button" className="btn btn-info"
+                  onClick={() => {
+                      browserHistory.push('/SignUp');
+                  }}>
+                  Register
+                </button>
+              </div>
+            </div>
+
+
           </form>
         </div>
       </div>

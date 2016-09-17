@@ -30,11 +30,10 @@ const validate = values => {
     if (values.address && values.address.length > 50) {
       errors.address = 'Must be fewer than 50 characters';
     }
-    if (!values.tel) {
-      errors.tel = 'Required';
-    } else if (!/\d{3}-\d{3}-\d{4}/.test(values.tel)) {
-      errors.tel = 'Phone must match the form "999-999-9999"';
-    }
+
+    // if (values.tel.length > 0 && (!/\d{3}-\d{3}-\d{4}/.test(values.tel))) {
+    //   errors.tel = 'Phone must match the form "999-999-9999"';
+    // }
 
 
   return errors;
@@ -66,22 +65,22 @@ class Signup extends React.Component {
 
             <fieldset className={`form-group ${username.touched && username.invalid ? 'has-error' : ''}`}>
               <label className="control-label">Username</label>
-              <input {...username} type="text" placeholder="Username" className="form-control" />
+              <input defaultValue = "bear" {...username} type="text" placeholder="Username" className="form-control" />
               {username.touched ? <div className="help-block">{username.error}</div> : ''}
             </fieldset>
             <fieldset className={`form-group ${password.touched && password.invalid ? 'has-error' : ''}`}>
               <label className="control-label">Password</label>
-              <input {...password} type="password" placeholder="Password" className="form-control" />
+              <input defaultValue="123" {...password} type="password" placeholder="Password" className="form-control" />
               {password.touched ? <div className="help-block">{password.error}</div> : ''}
             </fieldset>
             <fieldset className={`form-group ${passwordConfirmation.touched && passwordConfirmation.invalid ? 'has-error' : ''}`}>
               <label className="control-label">Password Confirmation</label>
-              <input {...passwordConfirmation} type="password" placeholder="Confirm Password" className="form-control" />
+              <input defaultValue="123" {...passwordConfirmation} type="password" placeholder="Confirm Password" className="form-control" />
               {passwordConfirmation.touched ? <div className="help-block">{passwordConfirmation.error}</div> : ''}
             </fieldset>
             <fieldset className={`form-group ${email.touched && email.invalid ? 'has-error' : ''}`}>
               <label className="control-label">Email</label>
-              <input {...email} type="text" placeholder="Email" className="form-control" />
+              <input defaultValue="bear@consept.com" {...email} type="text" placeholder="Email" className="form-control" />
               {email.touched ? <div className="help-block">{email.error}</div> : ''}
             </fieldset>
             <hr/>
@@ -121,15 +120,6 @@ class Signup extends React.Component {
                 <input {...tel} type="text" placeholder="Phone Number (999-999-9999)" className="form-control" />
                 {tel.touched ? <div className="help-block">{tel.error}</div> : ''}
               </fieldset>
-              <fieldset className={`form-group ${email.touched && email.invalid ? 'has-error' : ''}`}>
-                <label className="control-label">Email</label>
-                <input {...email} type="text" placeholder="Email" className="form-control" />
-                {email.touched ? <div className="help-block">{email.error}</div> : ''}
-              </fieldset>
-
-
-
-
 
             <button action="submit" className="btn btn-primary">Sign up</button>
           </form>
