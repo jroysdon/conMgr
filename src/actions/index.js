@@ -1,7 +1,5 @@
 import request from 'superagent';
-import {
-    browserHistory
-} from 'react-router';
+import { browserHistory } from 'react-router';
 
 import Parse from 'Parse';
 
@@ -80,50 +78,47 @@ export function closeModal() {
     }
 }
 
-export function getLocation(position) {
-    var position = {
-        latitude: null,
-        longitude: null
-    };
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(position);
-        // console.log(location.coords.latitude);
-        position.latitude = location.coords.latitude;
-        // console.log(location.coords.longitude);
-        position.longitude = location.coords.longitude;
-        console.log(position);
-    } else {
-        console.log("Geolocation is not supported by this browser.");
-    }
-    return position;
 
-}
 
 export function signUpUser(credentials) {
     return function(dispatch) {
-        var user = new Parse.User();
-        user.set("username", credentials.username);
-        user.set("password", credentials.password);
-        user.set("email", credentials.email);
-        //    other fields can be set just like with Parse.Object
-        user.set("nameFirst", credentials.nameFirst);
-        user.set("nameLast", credentials.nameLast);
-        user.set("address", credentials.address);
-        user.set("city", credentials.city);
-        user.set("state", credentials.state);
-        user.set("zipcode", credentials.zip);
-        user.set("phoneNumber", credentials.tel);
-        user.set("tNc", credentials.tNc);
-        user.set("emailverified", false);
+        var options = {
+            enableHighAccuracy: true,
+            timeout: 5000,
+            maximumAge: 0
+        }
 
-        var position = getLocation(location, function() {
-            var point = new Parse.GeoPoint(position);
-            debugger;
+        var position = {
+            latitude: null,
+            longitude: null
+        }
+
+        function setPosition(position) {
+            var locale = {
+                latitude: position.coords.latitude,
+                longitude: position.coords.longitude
+            };
+            var user = new Parse.User();
+            user.set("username", credentials.username);
+            user.set("password", credentials.password);
+            user.set("email", credentials.email);
+            //    other fields can be set just like with Parse.Object
+            user.set("nameFirst", credentials.nameFirst);
+            user.set("nameLast", credentials.nameLast);
+            user.set("address", credentials.address);
+            user.set("city", credentials.city);
+            user.set("state", credentials.state);
+            user.set("zipcode", credentials.zip);
+            user.set("phoneNumber", credentials.tel);
+            user.set("tNc", credentials.tNc);
+            user.set("emailverified", false);
+            var point = new Parse.GeoPoint(locale);
             user.set("location", point);
             user.signUp(null, {
                     success: function(user) {
                         console.log(' Hooray! Let them use the app now.');
-                        dispatch(signInUser(credentials.username, credentials.password));
+                        // dispatch(signInUser(credentials.username, credentials.password));
+                        browserHistory.push('/');
                     },
                     error: function(user, error) {
                         // Show the error message somewhere and let the user try again.
@@ -134,14 +129,45 @@ export function signUpUser(credentials) {
                     // saving the object failed.
                     dispatch(authError(error));
 
-                });
-        });
-    };
+                }
+            );
+
+        }
+
+
+        function showError(error) {
+            switch (error.code) {
+                case error.PERMISSION_DENIED:
+                    console.log("User denied the request for Geolocation.");
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    console.log("Location information is unavailable.");
+                    break;
+                case error.TIMEOUT:
+                    console.log("The request to get user location timed out.");
+                    break;
+                case error.UNKNOWN_ERROR:
+                    console.log("An unknown error occurred.");
+                    break;
+            }
+        }
+
+        if (navigator.geolocation) {
+            //get Coord's from browser
+            navigator.geolocation.getCurrentPosition(setPosition, showError, options);
+            //    } if (addressComplete ) {
+            // get coordinates from profile address
+
+        } else {
+            console.log("Geolocation is not supported by this browser.");
+        }
+
+    }
 }
 
 export function signInUser(credentials) {
     return function(dispatch) {
-        Parse.User.logIn(credentials.email, credentials.password, {
+        Parse.User.logIn(credentials.username, credentials.password, {
             success: function(user) {
                 var userID = user.id;
                 var nameFirst = user.get("nameFirst");
@@ -186,10 +212,13 @@ export function authenticateUser() {
 }
 
 export function signOutUser() {
+  Parse.User.logOut().then(() => {
     browserHistory.push('/');
-    return {
-        type: SIGN_OUT_USER
-    }
+    
+  })
+  return {
+      type: SIGN_OUT_USER
+  }
 }
 
 export function authError(error) {

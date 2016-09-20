@@ -6,12 +6,9 @@ import * as Actions from '../actions';
 const validate = values => {
   const errors = {};
 
-  if (!values.email) {
-    errors.email = "Please enter an email.";
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-    errors.email = 'Invalid email address'
+  if (!values.username) {
+    errors.username = "Please enter an username.";
   }
-
   if (!values.password) {
     errors.password = "Please enter a password.";
   }
@@ -32,7 +29,7 @@ class Login extends React.Component {
   }
 
   render() {
-    const { handleSubmit, fields: { email, password },submitting} = this.props;
+    const { handleSubmit, fields: { username, password },submitting} = this.props;
 
     return(
       <div className="container">
@@ -42,10 +39,10 @@ class Login extends React.Component {
           { this.renderAuthenticationError() }
 
           <form onSubmit={handleSubmit(this.handleFormSubmit)}>
-            <fieldset className={`form-group ${email.touched && email.invalid ? 'has-error' : ''}`}>
-              <label className="control-label">Email</label>
-              <input {...email} type="text" placeholder="Email" className="form-control" />
-              {email.touched ? <div className="help-block">{email.error}</div> : ''}
+            <fieldset className={`form-group ${username.touched && username.invalid ? 'has-error' : ''}`}>
+              <label className="control-label">Username</label>
+              <input {...username} type="text" placeholder="username" className="form-control" />
+              {username.touched ? <div className="help-block">{username.error}</div> : ''}
             </fieldset>
             <fieldset className={`form-group ${password.touched && password.invalid ? 'has-error' : ''}`}>
               <label className="control-label">Password</label>
@@ -94,6 +91,6 @@ function mapStateToProps(state) {
 
 export default reduxForm({
   form: 'login',
-  fields: ['email', 'password'],
+  fields: ['username', 'password'],
   validate},
   mapStateToProps, Actions)(Login);

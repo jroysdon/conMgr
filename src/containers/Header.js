@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
@@ -15,11 +16,9 @@ class Header extends React.Component {
   }
 
   renderName(){
-    // debugger;
     return[
-      // this.State.nameFirst
+      this.props.nameFirst
     ]
-
   }
 
   renderAuthLinks() {
@@ -36,7 +35,7 @@ class Header extends React.Component {
             role="button"
             aria-haspopup="true"
             aria-expanded="false">
-              Welcome
+              Welcome {this.renderName()}!
               <span className="caret"></span>
           </a>
           <ul className="dropdown-menu">
@@ -88,7 +87,8 @@ class Header extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    authenticated: state.auth.authenticated
+    authenticated: state.auth.authenticated,
+    nameFirst: state.auth.nameFirst
   }
 }
 

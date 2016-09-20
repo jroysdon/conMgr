@@ -1,6 +1,10 @@
-import React from 'react';
+
+import React, { Component, PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
+import { load as loadProfile } from '../components/profileLoader'
 import * as Actions from '../actions';
+
+export const fields = [ 'username', 'nameFirst', 'nameLast', 'address', 'city', 'state', 'zip,', 'tel','email' ];
 
 const validate = values => {
   const errors = {};
@@ -11,22 +15,6 @@ const validate = values => {
     errors.email = 'Invalid email address'
   }
 
-  if (!values.password) {
-    errors.password = "Please enter a password.";
-  }
-
-  if (!values.passwordConfirmation) {
-    errors.passwordConfirmation = "Please enter a password confirmation.";
-  }
-
-  if (values.password !== values.passwordConfirmation ) {
-    errors.password = 'Passwords do not match';
-  }
-
-
-  if (!values.username) {
-      errors.username = 'Required';
-    }
     if (values.address && values.address.length > 50) {
       errors.address = 'Must be fewer than 50 characters';
     }
@@ -53,7 +41,7 @@ class EditProfile extends React.Component {
   }
 
   render() {
-    const { handleSubmit, fields: { username, email, password, passwordConfirmation,nameFirst,nameLast,address,city,state,zip,tel,tNc}} = this.props;
+    const { handleSubmit, fields: { username, email,nameFirst,nameLast,address,city,state,zip,tel,tNc}} = this.props;
 
     return (
       <div className="container">
@@ -68,16 +56,6 @@ class EditProfile extends React.Component {
               <label className="control-label">Username</label>
               <input {...username} type="text" placeholder="Username" className="form-control" />
               {username.touched ? <div className="help-block">{username.error}</div> : ''}
-            </fieldset>
-            <fieldset className={`form-group ${password.touched && password.invalid ? 'has-error' : ''}`}>
-              <label className="control-label">Password</label>
-              <input {...password} type="password" placeholder="Password" className="form-control" />
-              {password.touched ? <div className="help-block">{password.error}</div> : ''}
-            </fieldset>
-            <fieldset className={`form-group ${passwordConfirmation.touched && passwordConfirmation.invalid ? 'has-error' : ''}`}>
-              <label className="control-label">Password Confirmation</label>
-              <input {...passwordConfirmation} type="password" placeholder="Confirm Password" className="form-control" />
-              {passwordConfirmation.touched ? <div className="help-block">{passwordConfirmation.error}</div> : ''}
             </fieldset>
             <fieldset className={`form-group ${email.touched && email.invalid ? 'has-error' : ''}`}>
               <label className="control-label">Email</label>
@@ -127,10 +105,6 @@ class EditProfile extends React.Component {
                 {email.touched ? <div className="help-block">{email.error}</div> : ''}
               </fieldset>
 
-
-
-
-
             <button action="submit" className="btn btn-primary">Sign up</button>
           </form>
         </div>
@@ -145,8 +119,20 @@ function mapStateToProps(state) {
   }
 }
 
+EditProfile.propTypes = {
+  fields: PropTypes.object.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  load: PropTypes.func.isRequired,
+  submitting: PropTypes.bool.isRequired
+}
+
 export default reduxForm({
   form: 'EditProfile',
-  fields: ['username','email', 'password', 'passwordConfirmation','nameFirst','nameLast','address','city','state','zip','tel','tNc'],
+  fields: ['username','email', 'nameFirst','nameLast','address','city','state','zip','tel','tNc'],
   validate
-}, mapStateToProps, Actions)(EditProfile);
+},
+state => ({ // mapStateToProps
+  initialValues: state.profile.data // will pull state into form's initialValues
+}),
+{ load: loadProfile }      // mapDispatchToProps (will bind action creator to dispatch)
+)(EditProfile);

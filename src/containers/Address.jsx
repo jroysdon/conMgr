@@ -8,12 +8,11 @@ const divLegendStyle = {
 
 class Address extends Component {
   shouldComponentUpdate(nextProps) {
-    return
-      //this.props.vName !== nextProps.vName ||
-      // this.props.street !== nextProps.street ||
-      // this.props.city !== nextProps.city ||
-      // this.props.state !== nextProps.state ||
-      // this.props.zipcode !== nextProps.zipcode ||
+    return this.props.vName !== nextProps.vName ||
+      this.props.street !== nextProps.street ||
+      this.props.city !== nextProps.city ||
+      this.props.state !== nextProps.state ||
+      this.props.zipcode !== nextProps.zipcode ||
       this.props.phones !== nextProps.phones
   }
 
