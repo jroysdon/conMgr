@@ -10,6 +10,9 @@ export const FETCH_FAVORITED_GIFS = 'FETCH_FAVORITED_GIFS';
 export const SIGN_IN_USER = 'SIGN_IN_USER';
 export const SIGN_OUT_USER = 'SIGN_OUT_USER';
 export const AUTH_ERROR = 'AUTH_ERROR';
+export const PROFILE_LOADED = 'PROFILE_LOADED';
+export const PROFILE_SAVED = 'PROFILE_SAVED';
+
 
 const API_URL = 'http://api.giphy.com/v1/gifs/search?q=';
 const API_KEY = '&api_key=dc6zaTOxFJmzC';
@@ -78,7 +81,15 @@ export function closeModal() {
     }
 }
 
-
+// export function uniqueUsername(){
+//   var query = new Parse.Query(Parse.User);
+//   query.equalTo("gender", "female");  // find all the women
+//   query.find({
+//   success: function(women) {
+//     // Do stuff
+//     }
+//   });
+// }
 
 export function signUpUser(credentials) {
     return function(dispatch) {
@@ -214,7 +225,7 @@ export function authenticateUser() {
 export function signOutUser() {
   Parse.User.logOut().then(() => {
     browserHistory.push('/');
-    
+
   })
   return {
       type: SIGN_OUT_USER
@@ -226,4 +237,42 @@ export function authError(error) {
         type: AUTH_ERROR,
         payload: error
     }
+}
+
+export function loadProfile(){
+  var userID = Parse.User.current();
+  var User = Parse.Object.extend("User");
+  var query = new Parse.Query(User);
+  debugger;
+  query.get(userID, {
+      success: function(profile) {
+          // The object was retrieved successfully.
+          console.log('qry : ' + profile);
+          debugger;
+          return {
+            type: PROFILE_LOADED,
+            profileData: {
+              username: profile.get('username'),
+              nameFirst: profile.get('nameFirst'),
+              nameLast: profile.get('nameLast'),
+              address: profile.get('address'),
+              city: profile.get('city'),
+              state: profile.get('state'),
+              zip: profile.get('zip'),
+              tel: profile.get('tel'),
+              email: profile.get('email')
+            }
+          }
+      },
+      error: function(object, error) {
+          // The object was not retrieved successfully.
+          // error is a Parse.Error with an error code and message.
+      }
+  });
+
+
+}
+
+export function profileSave(userID,ProfileData){
+
 }

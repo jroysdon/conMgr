@@ -5,7 +5,7 @@ import * as Actions from '../actions';
 import GifList from '../components/GifList';
 import GifModal from '../components/GifModal';
 import SearchBar from '../components/SearchBar';
- import '../styles/app.scss';
+import '../styles/app.scss';
 
 class Home extends React.Component {
   render() {
