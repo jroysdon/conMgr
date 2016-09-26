@@ -49,6 +49,7 @@
     "mocha": "^2.4.5",
     "node-sass": "^3.9.3",
     "parse": "^1.9.1",
+    "react-hot-loader": "^3.0.0-beta.5",
     "react-redux": "^4.4.5",
     "sass-loader": "^3.2.3",
     "script-loader": "^0.6.1",

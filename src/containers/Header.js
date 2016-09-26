@@ -49,6 +49,11 @@ class Header extends React.Component {
                 Edit Convention
               </Link>
             </li>
+            <li key={3.3}>
+              <Link className="nav-link" to="/ConWiz">
+                Convention Wizard
+              </Link>
+            </li>
               <li key={3.5} role="separator" className="divider"></li>
             <li key={3.9}>
               <a className="nav-link" href="#" onClick={() => this.handleSignout()}>Sign Out</a>

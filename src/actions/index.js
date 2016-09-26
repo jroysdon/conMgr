@@ -10,8 +10,8 @@ export const FETCH_FAVORITED_GIFS = 'FETCH_FAVORITED_GIFS';
 export const SIGN_IN_USER = 'SIGN_IN_USER';
 export const SIGN_OUT_USER = 'SIGN_OUT_USER';
 export const AUTH_ERROR = 'AUTH_ERROR';
-export const PROFILE_LOADED = 'PROFILE_LOADED';
-export const PROFILE_SAVED = 'PROFILE_SAVED';
+// export const PROFILE_LOADED = 'PROFILE_LOADED';
+// export const PROFILE_SAVED = 'PROFILE_SAVED';
 
 
 const API_URL = 'http://api.giphy.com/v1/gifs/search?q=';
@@ -273,6 +273,6 @@ export function loadProfile(){
 
 }
 
-export function profileSave(userID,ProfileData){
+export function saveProfile(userID,ProfileData){
 
 }

@@ -7,6 +7,7 @@ import Login from './containers/Login';
 import ResetPassword from './containers/ResetPassword';
 import EditProfile from './containers/EditProfile';
 import Convention from './containers/Convention';
+import ConWiz from './containers/ConWiz';
 import Favorites from './containers/Favorites';
 import RequireAuth from './containers/RequireAuth';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
@@ -22,6 +23,7 @@ ReactDOM.render(
         <IndexRoute component={Home} />
         <Route path="signup" component={Signup} />
         <Route path="convention" component={Convention} />
+        <Route path="conwiz" component={ConWiz} />
         <Route path="resetpassword" component={ResetPassword} />
         <Route path="editprofile" component={EditProfile} />
         <Route path="login" component={Login} />

@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {reduxForm} from 'redux-form';
-// import { load as loadProfile } from '../actions/'
+import { load as loadProfile } from '../reducers/profiler'
 import * as Actions from '../actions';
 import Parse from 'Parse';
 
@@ -31,7 +31,7 @@ class EditProfile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-            username: null,
+            username: 'Jim',
             nameFirst: null,
             nameLast: null,
             address: null,
@@ -202,5 +202,5 @@ state => ({ // mapStateToProps
   initialValues: state.profile // will pull state into form's initialValues
 })
 ,
- { load: loadProfile }      // mapDispatchToProps (will bind action creator to dispatch)
+  { load: loadProfile }      // mapDispatchToProps (will bind action creator to dispatch)
 )(EditProfile);

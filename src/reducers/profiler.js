@@ -4,7 +4,7 @@ const initialState =  {
   fetching: false,
   fetched: false,
   profile: {
-    username: null,
+    username: 'homer',
     nameFirst: null,
     nameLast: null,
     address: null,
@@ -40,5 +40,10 @@ const reducer = (state = initialState, action) => {
 //     type: PROFILE_LOADED,
 //     data
 // })
+
+export const load = profile => ({
+    type: PROFILE_LOADED,
+    profile
+})
 
 export default reducer
