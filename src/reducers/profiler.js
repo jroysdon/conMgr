@@ -13,7 +13,7 @@ export default function ProfileReducer (state = initialState, action) {
     switch (action.type) {
         case PROFILE_LOADED:
 
-        console.log('PROFILE_LOADED');
+        console.log('Case: PROFILE_LOADED');
           return{
               ...state,
               fetching: false,
@@ -27,11 +27,6 @@ export default function ProfileReducer (state = initialState, action) {
             return state
     }
 }
-
-// export const load = data => ({
-//     type: PROFILE_LOADED,
-//     data
-// })
 
 export const load = profile => ({
     type: PROFILE_LOADED,
