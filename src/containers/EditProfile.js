@@ -1,13 +1,13 @@
 import React, {Component, PropTypes} from 'react';
-import {reduxForm} from 'redux-form';
+import { reduxForm } from 'redux-form';
 import { load as loadProfile } from '../reducers/profiler'
+import { loadProfile as ldProfile } from '../actions';
 import * as Actions from '../actions';
 import Parse from 'Parse';
 
 const validate = values => {
 
     const errors = {};
-
     if (!values.email) {
         errors.email = "Please enter an email.";
     } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
@@ -29,18 +29,24 @@ const validate = values => {
 class EditProfile extends React.Component {
 
   constructor(props) {
-    super(props);
-    this.state = {
-            username: 'Jim',
-            nameFirst: null,
-            nameLast: null,
-            address: null,
-            city: null,
-            state: null,
-            zip: null,
-            tel: null,
-            email: null
-          };
+      super(props);
+      console.log('Profile Init');
+    // this.state = {
+    //         username: 'Jim',
+    //         nameFirst: null,
+    //         nameLast: null,
+    //         address: null,
+    //         city: null,
+    //         state: null,
+    //         zip: null,
+    //         tel: null,
+    //         email: null
+    //       };
+     }
+
+     componentWillMount = () => {
+       console.log('componentWillMount');
+       const profileData = ldProfile();
      }
 
     handleFormSubmit = (values) => {
@@ -57,6 +63,7 @@ class EditProfile extends React.Component {
     render() {
         const {
             handleSubmit,
+            load,
             fields: {
                 username,
                 email,
@@ -181,6 +188,8 @@ EditProfile.propTypes = {
     load: PropTypes.func.isRequired,
     submitting: PropTypes.bool.isRequired
 }
+
+
 
 export default reduxForm({
     form: 'EditProfile',

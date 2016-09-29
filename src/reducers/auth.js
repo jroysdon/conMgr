@@ -7,7 +7,7 @@ const initialState =  {
   error: null
 };
 
-export default function gifs(state = initialState, action) {
+export default function auth(state = initialState, action) {
   switch (action.type) {
     case SIGN_IN_USER:
       console.log('Signin UserID: ' + action.userID);
@@ -31,6 +31,9 @@ export default function gifs(state = initialState, action) {
         ...state,
         error: action.payload.message
       };
+
+
+
     default:
       return state;
   }

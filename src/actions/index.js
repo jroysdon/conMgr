@@ -1,5 +1,7 @@
 import request from 'superagent';
-import { browserHistory } from 'react-router';
+import {
+    browserHistory
+} from 'react-router';
 
 import Parse from 'Parse';
 
@@ -10,8 +12,8 @@ export const FETCH_FAVORITED_GIFS = 'FETCH_FAVORITED_GIFS';
 export const SIGN_IN_USER = 'SIGN_IN_USER';
 export const SIGN_OUT_USER = 'SIGN_OUT_USER';
 export const AUTH_ERROR = 'AUTH_ERROR';
-// export const PROFILE_LOADED = 'PROFILE_LOADED';
-// export const PROFILE_SAVED = 'PROFILE_SAVED';
+export const PROFILE_LOADED = 'PROFILE_LOADED';
+export const PROFILE_SAVED = 'PROFILE_SAVED';
 
 
 const API_URL = 'http://api.giphy.com/v1/gifs/search?q=';
@@ -188,14 +190,11 @@ export function signInUser(credentials) {
                     nameFirst: nameFirst,
                     userID: userID
                 });
-                // console.log(authData);
-                // browserHistory.push('/favorites');
                 browserHistory.push('/');
 
             },
             error: function(username, error) {
                 // The login failed. Check error to see why.
-                // console.log('Login: Error: ' + error.message);
                 dispatch(authError(error));
             }
         });
@@ -223,13 +222,13 @@ export function authenticateUser() {
 }
 
 export function signOutUser() {
-  Parse.User.logOut().then(() => {
-    browserHistory.push('/');
+    Parse.User.logOut().then(() => {
+        browserHistory.push('/');
 
-  })
-  return {
-      type: SIGN_OUT_USER
-  }
+    })
+    return {
+        type: SIGN_OUT_USER
+    }
 }
 
 export function authError(error) {
@@ -239,40 +238,49 @@ export function authError(error) {
     }
 }
 
-export function loadProfile(){
-  var userID = Parse.User.current();
-  var User = Parse.Object.extend("User");
-  var query = new Parse.Query(User);
-  debugger;
-  query.get(userID, {
-      success: function(profile) {
-          // The object was retrieved successfully.
-          console.log('qry : ' + profile);
-          debugger;
-          return {
-            type: PROFILE_LOADED,
-            profileData: {
-              username: profile.get('username'),
-              nameFirst: profile.get('nameFirst'),
-              nameLast: profile.get('nameLast'),
-              address: profile.get('address'),
-              city: profile.get('city'),
-              state: profile.get('state'),
-              zip: profile.get('zip'),
-              tel: profile.get('tel'),
-              email: profile.get('email')
+export function loadProfile() {
+    console.log('loadProfile');
+    var userID = Parse.User.current();
+    var User = Parse.Object.extend("User");
+    var query = new Parse.Query(User);
+    console.log('starting Qry');
+        query.get(userID.id).then(
+
+          // should I have a second THEN fire AFTER the Profile values are set?
+
+            function(profile) {
+                // The object was retrieved successfully.
+                console.log('query : ' + profile.get("username"));
+                const profileData = {
+                    "Profile": {
+                        username: profile.get("username"),
+                        nameFirst: profile.get("nameFirst"),
+                        nameLast: profile.get("nameLast"),
+                        address: profile.get("address"),
+                        city: profile.get("city"),
+                        state: profile.get("state"),
+                        zip: profile.get("zipcode"),
+                        tel: profile.get("phoneNumber"),
+                        email: profile.get("email"),
+                        geopoint: profile.get("location")
+                    }
+                }
+                console.log('profileData : ' + profileData.Profile.nameFirst )
+                console.log('Dispatching PROFILE_LOADED');
+                dispatch({
+                    type: PROFILE_LOADED,
+                    payload: profileData
+                });
+            },
+            function(object, error) {
+                // The object was not retrieved successfully.
+                // error is a Parse.Error with an error code and message.
+                dispatch(authError(error));
+                console.error(error)
             }
-          }
-      },
-      error: function(object, error) {
-          // The object was not retrieved successfully.
-          // error is a Parse.Error with an error code and message.
-      }
-  });
-
-
+        );
 }
 
-export function saveProfile(userID,ProfileData){
+export function saveProfile(userID, ProfileData) {
 
 }
