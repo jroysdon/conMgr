@@ -83,16 +83,6 @@ export function closeModal() {
     }
 }
 
-// export function uniqueUsername(){
-//   var query = new Parse.Query(Parse.User);
-//   query.equalTo("gender", "female");  // find all the women
-//   query.find({
-//   success: function(women) {
-//     // Do stuff
-//     }
-//   });
-// }
-
 export function signUpUser(credentials) {
     return function(dispatch) {
         var options = {
@@ -100,7 +90,6 @@ export function signUpUser(credentials) {
             timeout: 5000,
             maximumAge: 0
         }
-
         var position = {
             latitude: null,
             longitude: null
@@ -129,8 +118,7 @@ export function signUpUser(credentials) {
             user.set("location", point);
             user.signUp(null, {
                     success: function(user) {
-                        console.log(' Hooray! Let them use the app now.');
-                        // dispatch(signInUser(credentials.username, credentials.password));
+                        //                        console.log(' Hooray! Let them use the app now.');
                         browserHistory.push('/');
                     },
                     error: function(user, error) {
@@ -204,7 +192,6 @@ export function signInUser(credentials) {
 export function authenticateUser() {
     return function(dispatch) {
         var currentUser = Parse.User.current();
-        // debugger;
         if (currentUser) {
             var userID = currentUser.id;
             var nameFirst = currentUser.get("nameFirst");
@@ -239,33 +226,30 @@ export function authError(error) {
 }
 
 export function loadProfile() {
-    console.log('loadProfile');
-    var userID = Parse.User.current();
-    var User = Parse.Object.extend("User");
-    var query = new Parse.Query(User);
-    console.log('starting Qry');
+    return function(dispatch) {
+        console.log('loadProfile');
+        var userID = Parse.User.current();
+        var User = Parse.Object.extend("User");
+        var query = new Parse.Query(User);
+        console.log('starting Qry');
         query.get(userID.id).then(
-
-          // should I have a second THEN fire AFTER the Profile values are set?
 
             function(profile) {
                 // The object was retrieved successfully.
                 console.log('query : ' + profile.get("username"));
                 const profileData = {
-                    "Profile": {
-                        username: profile.get("username"),
-                        nameFirst: profile.get("nameFirst"),
-                        nameLast: profile.get("nameLast"),
-                        address: profile.get("address"),
-                        city: profile.get("city"),
-                        state: profile.get("state"),
-                        zip: profile.get("zipcode"),
-                        tel: profile.get("phoneNumber"),
-                        email: profile.get("email"),
-                        geopoint: profile.get("location")
-                    }
+                    username: profile.get("username"),
+                    nameFirst: profile.get("nameFirst"),
+                    nameLast: profile.get("nameLast"),
+                    address: profile.get("address"),
+                    city: profile.get("city"),
+                    state: profile.get("state"),
+                    zip: profile.get("zipcode"),
+                    tel: profile.get("phoneNumber"),
+                    email: profile.get("email"),
+                    geopoint: profile.get("location")
                 }
-                console.log('profileData : ' + profileData.Profile.nameFirst )
+                console.log('profileData : ' + profileData.nameFirst)
                 console.log('Dispatching PROFILE_LOADED');
                 dispatch({
                     type: PROFILE_LOADED,
@@ -279,8 +263,43 @@ export function loadProfile() {
                 console.error(error)
             }
         );
+    }
 }
 
-export function saveProfile(userID, ProfileData) {
+export function saveProfile(ProfileData) {
+    return function(dispatch) {
+        console.log('saveProfile');
+        var userID = Parse.User.current();
+        var User = Parse.Object.extend("User");
+        var query = new Parse.Query(userID);
+        console.log('starting Save for userID :' + userID.id);
+        query.get(userID.id).then(
+            function(profile) {
+                profile.set("username", ProfileData.username);
+                // if email has changed, add logic to reset the email verified flag
+                //          profile.set("email", ProfileData.email);
+                //
+                profile.set("nameFirst", ProfileData.nameFirst);
+                profile.set("nameLast", ProfileData.nameLast);
+                profile.set("address", ProfileData.address);
+                profile.set("city", ProfileData.city);
+                profile.set("state", ProfileData.state);
+                profile.set("zipcode", ProfileData.zip);
+                profile.set("phoneNumber", ProfileData.tel);
 
+
+                profile.save();
+                browserHistory.push('/');
+
+
+            },
+            function(result, error) {
+            // An error occurred.
+
+            console.error(ParseError)
+            dispatch(authError(ParseError.message ));
+          }
+
+        )
+    }
 }

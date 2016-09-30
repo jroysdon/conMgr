@@ -1,8 +1,7 @@
 import React, {Component, PropTypes} from 'react';
-import { reduxForm } from 'redux-form';
-import { load as loadProfile } from '../reducers/profiler'
-import { loadProfile as ldProfile } from '../actions';
-import * as Actions from '../actions';
+import {reduxForm} from 'redux-form';
+import {load as loadProfile} from '../reducers/profiler'
+import * as actions from '../actions';
 import Parse from 'Parse';
 
 const validate = values => {
@@ -28,29 +27,16 @@ const validate = values => {
 
 class EditProfile extends React.Component {
 
-  constructor(props) {
-      super(props);
-      console.log('Profile Init');
-    // this.state = {
-    //         username: 'Jim',
-    //         nameFirst: null,
-    //         nameLast: null,
-    //         address: null,
-    //         city: null,
-    //         state: null,
-    //         zip: null,
-    //         tel: null,
-    //         email: null
-    //       };
-     }
+    constructor(props) {
+        super(props);
+    }
 
-     componentWillMount = () => {
-       console.log('componentWillMount');
-       const profileData = ldProfile();
-     }
+    componentWillMount = () => {
+        const profileData = this.props.loadProfile();
+    }
 
     handleFormSubmit = (values) => {
-        this.props.EditProfileUser(values);
+        this.props.saveProfile(values);
     }
 
     renderAuthenticationError() {
@@ -64,6 +50,8 @@ class EditProfile extends React.Component {
         const {
             handleSubmit,
             load,
+            submitting,
+            resetForm,
             fields: {
                 username,
                 email,
@@ -170,7 +158,12 @@ class EditProfile extends React.Component {
                                 : ''}
                         </fieldset>
 
-                        <button action="submit" className="btn btn-primary">Sign up</button>
+                        <button action="submit" className="btn btn-primary">
+                            Save Changes
+                        </button>
+                        <button type="button" className="btn btn-secondary" disabled={submitting} onClick={resetForm}>
+                            Reset Values
+                        </button>
                     </form>
                 </div>
             </div>
@@ -185,11 +178,9 @@ function mapStateToProps(state) {
 EditProfile.propTypes = {
     fields: PropTypes.object.isRequired,
     handleSubmit: PropTypes.func.isRequired,
-    load: PropTypes.func.isRequired,
+    //    load: PropTypes.func.isRequired,
     submitting: PropTypes.bool.isRequired
 }
-
-
 
 export default reduxForm({
     form: 'EditProfile',
@@ -206,10 +197,8 @@ export default reduxForm({
         'tNc'
     ],
     validate
-},
-state => ({ // mapStateToProps
-  initialValues: state.profile // will pull state into form's initialValues
-})
-,
-  { load: loadProfile }      // mapDispatchToProps (will bind action creator to dispatch)
-)(EditProfile);
+}, state => ({ // mapStateToProps
+    initialValues: state.profiler.profile // will pull state into form's initialValues
+}),
+//{ load: loadProfile() }      // mapDispatchToProps (will bind action creator to dispatch)
+actions)(EditProfile);
